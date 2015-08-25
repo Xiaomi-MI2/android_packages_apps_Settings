@@ -29,6 +29,7 @@ import android.hardware.CmHardwareManager;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.Handler;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
@@ -43,6 +44,7 @@ import android.view.IWindowManager;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.WindowManagerGlobal;
+import android.widget.Toast;
 
 import com.android.internal.util.cm.ScreenType;
 
@@ -78,6 +80,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String KEY_HOME_ANSWER_CALL = "home_answer_call";
     private static final String KEY_VOLUME_MUSIC_CONTROLS = "volbtn_music_controls";
     private static final String KEY_VOLUME_CONTROL_RING_STREAM = "volume_keys_control_ring_stream";
+    private static final String KEY_HIDE_OVERFLOW_BUTTON = "hide_overflow_button";
 
     private static final String CATEGORY_POWER = "power_key";
     private static final String CATEGORY_HOME = "home_key";
@@ -131,6 +134,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private ListPreference mNavigationRecentsLongPressAction;
     private SwitchPreference mPowerEndCall;
     private SwitchPreference mHomeAnswerCall;
+    private SwitchPreference mHideOverflowButton;
 
     private PreferenceCategory mNavigationPreferencesCat;
 
@@ -159,6 +163,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
         // Navigation bar left
         mNavigationBarLeftPref = (SwitchPreference) findPreference(KEY_NAVIGATION_BAR_LEFT);
+
+        // Hide overflow button
+        mHideOverflowButton = (SwitchPreference) findPreference(KEY_HIDE_OVERFLOW_BUTTON);
 
         // Navigation bar recents long press activity needs custom setup
         mNavigationRecentsLongPressAction =
@@ -715,6 +722,15 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             return true;
         } else if (preference == mHomeAnswerCall) {
             handleToggleHomeButtonAnswersCallPreferenceClick();
+            return true;
+        } else if (preference == mHideOverflowButton) {
+            boolean enabled = mHideOverflowButton.isChecked();
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.UI_FORCE_HIDE_OVERFLOW_BUTTON,
+                    enabled ? 1 : 0);
+            // Show toast
+            Toast.makeText(getActivity(), R.string.hide_overflow_button_toast,
+                    Toast.LENGTH_LONG).show();
             return true;
         }
 
