@@ -1436,6 +1436,8 @@
     <string name="clear_adb_keys" msgid="4038889221503122743">"撤消USB调试授权"</string>
     <string name="bugreport_in_power" msgid="7923901846375587241">"错误报告快捷方式"</string>
     <string name="bugreport_in_power_summary" msgid="1778455732762984579">"在电源菜单中显示用于提交错误报告的按钮"</string>
+    <string name="keep_screen_on" msgid="1146389631208760344">"不锁定屏幕"</string>
+    <string name="keep_screen_on_summary" msgid="2173114350754293009">"充电时屏幕不会休眠"</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"启用蓝牙 HCI 信息收集日志"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"捕获单个文件中的所有蓝牙 HCI 包"</string>
     <string name="oem_unlock_enable" msgid="6040763321967327691">"OEM 解锁"</string>
